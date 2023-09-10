@@ -44,10 +44,12 @@ _Estas instrucciones te permitirán obtener una copia del proyecto en funcionami
 
 -Funciones 
 
-1 • Crear y guardar usuarios.<br>                            NOTA: Enviarle en el body {"firstName":"nombre_usuario", "lastName":"apellido_usuario", "email":"email_usuario}
-2 • Obtener los Bootcamp de un usuario.<br>                 NOTA: Reemplazar ":id" por el id a consultar
-3 • Obtener todos los Usuarios incluyendo, los Bootcamp.<br> 
-4 • Actualizar usuario por Id.<br>                           NOTA: Reemplazar ":id" por el id a actualizar y enviarle por el body {"firstName":"nombre_usuario", "lastName":"apellido_usuario", "email":"email_usuario}
+1 • Registro de un nuevo usuario.<br>                            NOTA: Enviarle en el body {"firstName":"nombre_usuario", "lastName":"apellido_usuario", "password":"password_usuario","email":"email_usuario}
+2 • Inicio de sesión en la API.<br>                 NOTA: Enviarle en el body { "password":"password_usuario","email":"email_usuario}
+3 • Consultar los datos del usuario según id<br>     NOTA: Reemplazar ":id" por el id a consultar
+4 • Lista información de todos los usuarios y los Bootcamp
+registrados.
+5 • Actualizar usuario por Id.<br>                           NOTA: Reemplazar ":id" por el id a actualizar y enviarle por el body {"firstName":"nombre_usuario", "lastName":"apellido_usuario", "email":"email_usuario}
 5 • Eliminar un usuario por Id.<br>                          NOTA:Reemplazar ":id" por el id a eliminar
 
 Para el Bootcamp:
@@ -58,15 +60,16 @@ Para el Bootcamp:
 
 | Metodo HTTP | Función |                 Endpoint                      |
 | ------------ | ------------ | ------------ | 
-|    POST     |    1    |  api/users                                    | 
-|    GET      |    2    |  api/users/:id                                | 
-|    GET      |    3    |  api/users                                    | 
-|    PUT      |    4    |  api/users/id                                 | 
-|    DELETE   |    5    |  api/users/:id                                |
-|    POST     |    6    |  api/bootcamps                                |
-|    GET      |    7    |  api/users/add/:userId/bootcamps/:bootcampId  |
-|    GET      |    8    |  api/bootcamps/:id                            | 
-|    GET      |    9    |  api/bootcamps                                | 
+|    POST     |    1    |  api/signup                                   |
+|    POST     |    2    |  api/signin                                   | 
+|    GET      |    3    |  api/users/:id                                | 
+|    GET      |    4    |  api/users                                    | 
+|    PUT      |    5    |  api/users/:id                                 | /*Quede aqui*/
+|    DELETE   |    6    |  api/users/:id                                |
+|    POST     |    7    |  api/bootcamps                                |
+|    GET      |    8    |  api/users/add/:userId/bootcamps/:bootcampId  |
+|    GET      |    9    |  api/bootcamps/:id                            | 
+|    GET      |    10    |  api/bootcamps                                | 
 <br><br>
 
 ##  🚀🚀🚀 ENJOY 🚀🚀🚀
