@@ -1,11 +1,11 @@
 const express = require("express");
-const sequelize=require('sequelize')
+const sequelize = require("sequelize");
 const router = express.Router(); //Declaramos router para manejar las rutas
 const { Bootcamp } = require("../models/bootcamp.models"); // Importamos el modelo Bootcamp
 const { User } = require("../models/user.models"); //Importamos el modelo User
 require("../models/index"); //corremos el index
 
-const { verifyToken} = require('../middlewares/middlewares.js');
+const { verifyToken } = require("../middlewares/middlewares.js");
 
 //Crear un bootcamp
 const createBootcamp = async function (req, res) {
@@ -25,21 +25,28 @@ const createBootcamp = async function (req, res) {
     });
   } catch (error) {
     console.log("Error al crear el bootcamp.", error);
-    res.status(400).json({ message: 'Hay un error al ingresar el bootcamp, tener en cuenta "cue" solo acepta números enteros menores o iguales a 10.' });
+    res
+      .status(400)
+      .json({
+        message:
+          'Hay un error al ingresar el bootcamp, tener en cuenta "cue" solo acepta números enteros menores o iguales a 10.',
+      });
   }
 };
 // Agregamos un usuario a un bootcamp
 const addUser = async (req, res) => {
   try {
-    const {userId }= req.body; // ID del usuario
-    const { bootcampId}= req.body; // ID del usuario 
+    const { userId } = req.body; // ID del usuario
+    const { bootcampId } = req.body; // ID del usuario
     // ID del bootcamp
     const user = await User.findByPk(userId);
     const bootcamp = await Bootcamp.findByPk(bootcampId);
 
     if (user && bootcamp) {
       await user.setBootcamps([bootcamp]); // Agregar el bootcamp al usuario
-      res.json({ message: `Usuario ${user.firstName} ${user.lastName} agregado al ${bootcamp.title}` });
+      res.json({
+        message: `Usuario ${user.firstName} ${user.lastName} agregado al ${bootcamp.title}`,
+      });
     } else {
       res.status(404).json({ message: "Usuario o bootcamp no encontrado" });
     }
@@ -111,5 +118,5 @@ router.get("/bootcamps", findAll);
 
 //Exportamos
 module.exports = {
-  router
+  router,
 };

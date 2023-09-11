@@ -5,10 +5,14 @@ const { User } = require("../models/user.models");
 const { Bootcamp } = require("../models/bootcamp.models");
 require("../models/index");
 
-const bcrypt=require('bcrypt');
-const jwt=require('jsonwebtoken')
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
-const { verifyEmail, verifyToken ,mySession} = require('../middlewares/middlewares.js');
+const {
+  verifyEmail,
+  verifyToken,
+  mySession,
+} = require("../middlewares/middlewares.js");
 
 require("dotenv").config({ path: "./.env" });
 
@@ -36,7 +40,9 @@ const findUserById = async (req, res) => {
       "Error al obtener los bootcamps del usuario con id: " + userId,
       error
     );
-    res.status(500).json({ error: "Error comuniquese con el área de soporte de la APP" });
+    res
+      .status(500)
+      .json({ error: "Error comuniquese con el área de soporte de la APP" });
   }
 };
 
@@ -59,8 +65,9 @@ const findAll = async function (req, res) {
     res.json({ usuarios: findAllUsers });
   } catch (error) {
     console.log("Error al obtener todos los bootcamps de los usuarios.", error);
-    res.status(500).json({ error: "Error comuniquese con el área de soporte de la APP" });
-
+    res
+      .status(500)
+      .json({ error: "Error comuniquese con el área de soporte de la APP" });
   }
 };
 //Actualizar un usuario, según su Id
@@ -92,8 +99,9 @@ const updateUserById = async (req, res) => {
     }
   } catch (error) {
     console.log("Error al actualizar el usuario.", error);
-    res.status(500).json({ error: "Error comuniquese con el área de soporte de la APP" });
-
+    res
+      .status(500)
+      .json({ error: "Error comuniquese con el área de soporte de la APP" });
   }
 };
 
@@ -147,7 +155,7 @@ const login = async (req, res) => {
     //si matchean renderizamos para un login correcto
     //3.1 Variable con duracion del token descomentar para tiempo a usar
 
-    const time = Math.floor(new Date() / 1000) + 3600*24; //1 dia
+    const time = Math.floor(new Date() / 1000) + 3600 * 24; //1 dia
     //const time = Math.floor(new Date() / 1000) + 3600; // 1 hora
     //const time = Math.floor(new Date() / 1000) + 300; // 5 minutos
 
@@ -165,18 +173,18 @@ const login = async (req, res) => {
     );
 
     //5. Le retorno el token al cliente
-    console.log('token: ',token);
+    console.log("token: ", token);
     res.json(token);
   } else {
     //Sino renderizamos para pass incorrecto
     return res.status(404).json({ error: "Contraseña incorrecta" });
   }
   const mySession = async (req, res) => {
-    const data = req.data
+    const data = req.data;
     console.log(data);
     res.json(data);
   };
-  mySession
+  mySession;
 };
 
 const signup = async (req, res) => {
@@ -229,24 +237,24 @@ const signup = async (req, res) => {
   }
 
   const mySession = async (req, res) => {
-    const data = req.data
+    const data = req.data;
     res.json(data);
   };
-  mySession
+  mySession;
 };
 
 //Rutas Auth
 router.post("/signup", verifyEmail, signup);
-router.post("/signin",login)
+router.post("/signin", login);
 
 // Rutas Users
 router.get("/users/:id", verifyToken, findUserById);
 router.get("/users", verifyToken, findAll);
-router.put("/users/:id",verifyToken, updateUserById);
+router.put("/users/:id", verifyToken, updateUserById);
 router.delete("/users/:id", deleteUserById);
-
 
 // Exportamos
 module.exports = {
-  router // Exporta el enrutador
+  router, // Exporta el enrutador
+  mySession
 };
