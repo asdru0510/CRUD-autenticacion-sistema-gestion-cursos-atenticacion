@@ -12,23 +12,6 @@ const { verifyEmail, verifyToken ,mySession} = require('../middlewares/middlewar
 
 require("dotenv").config({ path: "./.env" });
 
-//Crea un usuario
-/* const createUser = async function (req, res) {
-  const { firstName, lastName, email } = req.body;
-  try {
-    const userCreated = await User.create({
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-    });
-    console.log(
-      `Se ha creado el usuario: ${JSON.stringify(userCreated, null, 2)}`
-    );
-    res.json({ message: "Usuario creado", user: userCreated.toJSON() });
-  } catch (error) {
-    console.log("Error al crear el usuario.", error);
-  }
-}; */
 //Encuentra un usuario por Id
 const findUserById = async (req, res) => {
   const userId = parseInt(req.params.id);
@@ -53,7 +36,7 @@ const findUserById = async (req, res) => {
       "Error al obtener los bootcamps del usuario con id: " + userId,
       error
     );
-    res.status(500).json({ error: "Error interno del servidor" });
+    res.status(500).json({ error: "Error comuniquese con el área de soporte de la APP" });
   }
 };
 
@@ -76,6 +59,8 @@ const findAll = async function (req, res) {
     res.json({ usuarios: findAllUsers });
   } catch (error) {
     console.log("Error al obtener todos los bootcamps de los usuarios.", error);
+    res.status(500).json({ error: "Error comuniquese con el área de soporte de la APP" });
+
   }
 };
 //Actualizar un usuario, según su Id
@@ -83,8 +68,6 @@ const updateUserById = async (req, res) => {
   try {
     // 1. Recuperamos el Id del usuario
     const userId = parseInt(req.query.params); //para pillar por la ruta de la forma /api/users?id=1
-    console.log("valor req.query.id: ", req.query.id);
-    console.log("id de usuario", userId, "tipo: ", typeof userId);
     // 2. Recuperamos el nombre y el balance
     const { firstName, lastName, email } = req.body;
     // 3. Actualizamos la base de datos
@@ -97,7 +80,7 @@ const updateUserById = async (req, res) => {
       { where: { id: userId } }
     );
 
-    // Obtener el usuario actualizado
+    // 4.Obtener el usuario actualizado
     if (affectedRows > 0) {
       const updatedUser = await User.findByPk(userId);
       console.log(
@@ -109,6 +92,8 @@ const updateUserById = async (req, res) => {
     }
   } catch (error) {
     console.log("Error al actualizar el usuario.", error);
+    res.status(500).json({ error: "Error comuniquese con el área de soporte de la APP" });
+
   }
 };
 
@@ -179,7 +164,7 @@ const login = async (req, res) => {
       process.env.SECRET_KEY
     );
 
-    //4. Le retorno el token al cliente
+    //5. Le retorno el token al cliente
     console.log('token: ',token);
     res.json(token);
   } else {
@@ -205,14 +190,7 @@ const signup = async (req, res) => {
     });
   }
 
-  // //3. Verificamos que contraseñas coincidan
-  // if (password != pass_confirm) {
-  //     return res.status(400).json({
-  //         err: 'Las contraseñas no coinciden'
-  //     })
-  // };
-
-  //5. Creamos el usuario en la base de datos
+  //3. Creamos el usuario en la base de datos
   let newUser;
   try {
     let passwordHashed = await bcrypt.hash(password, 10); //Hasheamos la pass
@@ -223,23 +201,14 @@ const signup = async (req, res) => {
       email,
       password: passwordHashed,
     });
-    console.log(newUser);
-    /* try {
-          // const pass_encrypt = await bcrypt.hash(password, 10);
-          // console.log(pass_encrypt);
-          // new_user = await User.create({ name, email, password: pass_encrypt });
-          new_user = await User.create({ name, email, password });
-      } catch (error) {
-          return res.status(400).json(error)
-      } */
 
-    //6. Genero el nuevo token y se lo envío al usuario
+    //4. Genero el nuevo token y se lo envío al usuario
     //Variable con duracion del token descomentar para tiempo a usar
     //const time = Math.floor(new Date() / 1000) + 3600*24; //1 dia
     //const time = Math.floor(new Date() / 1000) + 3600; // 1 hora
     const time = Math.floor(new Date() / 1000) + 300; // 5 minutos
 
-    //4. Creo el token
+    //4.1 Creo el token
     const token = jwt.sign(
       {
         exp: time,
@@ -252,7 +221,7 @@ const signup = async (req, res) => {
       process.env.SECRET_KEY
     );
 
-    //4. Le retorno el token al cliente
+    //4.2 Le retorno el token al cliente
     res.json(token);
   } catch (error) {
     console.error(error);
@@ -266,14 +235,11 @@ const signup = async (req, res) => {
   mySession
 };
 
-
-
 //Rutas Auth
 router.post("/signup", verifyEmail, signup);
 router.post("/signin",login)
 
 // Rutas Users
-//router.post("/users", createUser);
 router.get("/users/:id", verifyToken, findUserById);
 router.get("/users", verifyToken, findAll);
 router.put("/users/:id",verifyToken, updateUserById);
