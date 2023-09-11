@@ -76,13 +76,14 @@ const updateUserById = async (req, res) => {
     // 1. Recuperamos el Id del usuario
     const userId = parseInt(req.query.params); //para pillar por la ruta de la forma /api/users?id=1
     // 2. Recuperamos el nombre y el balance
-    const { firstName, lastName, email } = req.body;
+    const { firstName, lastName, email,password } = req.body;
     // 3. Actualizamos la base de datos
     const [affectedRows] = await User.update(
       {
         firstName,
         lastName,
         email,
+        password
       },
       { where: { id: userId } }
     );
