@@ -49,14 +49,14 @@ _Estas instrucciones te permitirán obtener una copia del proyecto en funcionami
 3 • Consultar los datos del usuario según id<br>     NOTA: Reemplazar ":id" por el id a consultar
 4 • Lista información de todos los usuarios y los Bootcamp
 registrados.
-5 • Actualizar usuario por Id.<br>                           NOTA: Reemplazar ":id" por el id a actualizar y enviarle por el body {"firstName":"nombre_usuario", "lastName":"apellido_usuario", "email":"email_usuario}
-5 • Eliminar un usuario por Id.<br>                          NOTA:Reemplazar ":id" por el id a eliminar
+5 • Actualizar usuario por Id.<br>                           NOTA: Reemplazar ":id" por el id a actualizar y enviarle por el body {"firstName":"nombre_usuario", "lastName":"apellido_usuario", "email":"email_usuario, password:password}
+6 • Eliminar un usuario por Id.<br>                          NOTA:Reemplazar ":id" por el id a eliminar
 
 Para el Bootcamp:
-6 • Crear y guardar un nuevo Bootcamp.<br>                  NOTA: Enviarle en el body {"title":"titulo_bootcamp", "cue":número de sesiones(clases), "description":"descripción_bootcamp"}
-7 • Agregar un Usuario a un Bootcamp.<br>                   NOTA: Reemplazar ":userId" por el id del usuario a agregar y ":bootcampId" por el id del bootcamp (materia o curso)
-8 • Obtener un Bootcamp por id.<br>                         NOTA: Reemplazar ":id" por el id a consultar
-9 • Obtener todos los Usuarios incluyendo los Bootcamp. 
+7 • Crear y guardar un nuevo Bootcamp.<br>                  NOTA: Enviarle en el body {"title":"titulo_bootcamp", "cue":número de sesiones(clases), "description":"descripción_bootcamp"}
+8 • Agregar un Usuario a un Bootcamp.<br>                   NOTA: Enviarle en el body {"userId":"id_user", "bootcampId":"id_bootcamp"} Reemplazar "id_user" por el id del usuario a agregar y "id_bootcamp" por el id del bootcamp (materia o curso)
+9 • Obtener un Bootcamp por id.<br>                         NOTA: Reemplazar ":id" por el id a consultar
+10 • Obtener todos los Usuarios incluyendo los Bootcamp. 
 
 | Metodo HTTP | Función |                 Endpoint                      |
 | ------------ | ------------ | ------------ | 
@@ -64,12 +64,12 @@ Para el Bootcamp:
 |    POST     |    2    |  api/signin                                   | 
 |    GET      |    3    |  api/users/:id                                | 
 |    GET      |    4    |  api/users                                    | 
-|    PUT      |    5    |  api/users/:id                                 | /*Quede aqui*/
+|    PUT      |    5    |  api/users/:id                                | 
 |    DELETE   |    6    |  api/users/:id                                |
 |    POST     |    7    |  api/bootcamps                                |
-|    GET      |    8    |  api/users/add/:userId/bootcamps/:bootcampId  |
+|    POST     |    8    |  api/bootcamps/adduser                        |
 |    GET      |    9    |  api/bootcamps/:id                            | 
-|    GET      |    10    |  api/bootcamps                                | 
+|    GET      |    10   |  api/bootcamps                                | 
 <br><br>
 
 ##  🚀🚀🚀 ENJOY 🚀🚀🚀
