@@ -5,7 +5,7 @@ const { Bootcamp } = require("../models/bootcamp.models"); // Importamos el mode
 const { User } = require("../models/user.models"); //Importamos el modelo User
 require("../models/index"); //corremos el index
 
-const { verifyEmail, verifyToken ,mySession} = require('../middlewares/middlewares.js');
+const { verifyToken} = require('../middlewares/middlewares.js');
 
 //Crear un bootcamp
 const createBootcamp = async function (req, res) {
@@ -32,26 +32,15 @@ const createBootcamp = async function (req, res) {
 const addUser = async (req, res) => {
   try {
     const {userId }= req.body; // ID del usuario
-    const { bootcampId}= req.body; // ID del usuario
-   
-
-    console.log(req.body);
+    const { bootcampId}= req.body; // ID del usuario 
     // ID del bootcamp
     const user = await User.findByPk(userId);
-    console.log('valor del user: ',user);
-    //console.log("id capturado del url: ", UserId);
     const bootcamp = await Bootcamp.findByPk(bootcampId);
-    console.log("User: ", user);
-    console.log("Bootcamp: ", bootcamp);
 
     if (user && bootcamp) {
       await user.setBootcamps([bootcamp]); // Agregar el bootcamp al usuario
-      console.log("User: ", user);
-      console.log("Bootcamp: ", bootcamp);
       res.json({ message: `Usuario ${user.firstName} ${user.lastName} agregado al ${bootcamp.title}` });
     } else {
-      console.log("User: ", user);
-      console.log("Bootcamp: ", bootcamp);
       res.status(404).json({ message: "Usuario o bootcamp no encontrado" });
     }
   } catch (error) {
@@ -71,7 +60,6 @@ const findById = async function (req, res) {
     });
 
     if (!bootcampById) {
-      console.log("Id no encontrado!");
       res.status(404).json({ error: "Bootcamp no encontrado" });
     } else {
       console.log(JSON.stringify(bootcampById, null, 2));
@@ -109,6 +97,9 @@ const findAll = async function (req, res) {
     res.json({ Bootcamps: findAllBootcamp });
   } catch (error) {
     console.log("Error al obtener todos los bootcamps.", error);
+    res
+      .status(400)
+      .json({ error: "Ha ocurrido un error al obtener todos los bootcamps." });
   }
 };
 
