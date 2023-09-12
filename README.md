@@ -44,19 +44,19 @@ _Estas instrucciones te permitirán obtener una copia del proyecto en funcionami
 
 -Funciones 
 
-1 • Registro de un nuevo usuario.<br>                            NOTA: Enviarle en el body {"firstName":"nombre_usuario", "lastName":"apellido_usuario", "password":"password_usuario","email":"email_usuario}
-2 • Inicio de sesión en la API.<br>                 NOTA: Enviarle en el body { "password":"password_usuario","email":"email_usuario}
-3 • Consultar los datos del usuario según id<br>     NOTA: Reemplazar ":id" por el id a consultar
-4 • Lista información de todos los usuarios y los Bootcamp
+- 1 Registro de un nuevo usuario.<br>                            NOTA: Enviarle en el body {"firstName":"nombre_usuario", "lastName":"apellido_usuario", "password":"password_usuario","email":"email_usuario}
+- 2 Inicio de sesión en la API.<br>                 NOTA: Enviarle en el body { "password":"password_usuario","email":"email_usuario}
+- 3 Consultar los datos del usuario según id<br>     NOTA: Reemplazar ":id" por el id a consultar
+- 4 Lista información de todos los usuarios y los Bootcamp
 registrados.
-5 • Actualizar usuario por Id.<br>                           NOTA: Reemplazar ":id" por el id a actualizar y enviarle por el body {"firstName":"nombre_usuario", "lastName":"apellido_usuario", "email":"email_usuario, password:password}
-6 • Eliminar un usuario por Id.<br>                          NOTA:Reemplazar ":id" por el id a eliminar
+- 5 Actualizar usuario por Id.<br>                           NOTA: Reemplazar ":id" por el id a actualizar y enviarle por el body {"firstName":"nombre_usuario", "lastName":"apellido_usuario", "email":"email_usuario, password:password}
+- 6 Eliminar un usuario por Id.<br>                          NOTA:Reemplazar ":id" por el id a eliminar
 
 Para el Bootcamp:
-7 • Crear y guardar un nuevo Bootcamp.<br>                  NOTA: Enviarle en el body {"title":"titulo_bootcamp", "cue":número de sesiones(clases), "description":"descripción_bootcamp"}
-8 • Agregar un Usuario a un Bootcamp.<br>                   NOTA: Enviarle en el body {"userId":"id_user", "bootcampId":"id_bootcamp"} Reemplazar "id_user" por el id del usuario a agregar y "id_bootcamp" por el id del bootcamp (materia o curso)
-9 • Obtener un Bootcamp por id.<br>                         NOTA: Reemplazar ":id" por el id a consultar
-10 • Obtener todos los Usuarios incluyendo los Bootcamp. 
+- 7 Crear y guardar un nuevo Bootcamp.<br>                  NOTA: Enviarle en el body {"title":"titulo_bootcamp", "cue":número de sesiones(clases), "description":"descripción_bootcamp"}
+- 8 Agregar un Usuario a un Bootcamp.<br>                   NOTA: Enviarle en el body {"userId":"id_user", "bootcampId":"id_bootcamp"} Reemplazar "id_user" por el id del usuario a agregar y "id_bootcamp" por el id del bootcamp (materia o curso)
+- 9 Obtener un Bootcamp por id.<br>                         NOTA: Reemplazar ":id" por el id a consultar
+- 10 Obtener todos los Usuarios incluyendo los Bootcamp. 
 
 | Metodo HTTP | Función |                 Endpoint                      |
 | ------------ | ------------ | ------------ | 
