@@ -77,13 +77,17 @@ const updateUserById = async (req, res) => {
     const userId = parseInt(req.query.params); //para pillar por la ruta de la forma /api/users?id=1
     // 2. Recuperamos el nombre y el balance
     const { firstName, lastName, email,password } = req.body;
+
+    //2.1 hasheamos la password
+
+    let passwordHashed = await bcrypt.hash(password, 10); //Hasheamos la pass
     // 3. Actualizamos la base de datos
     const [affectedRows] = await User.update(
       {
         firstName,
         lastName,
         email,
-        password
+        password:passwordHashed
       },
       { where: { id: userId } }
     );
